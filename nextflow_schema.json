@@ -1,0 +1,47 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "https://raw.githubusercontent.com/./master/nextflow_schema.json",
+    "title": ". pipeline parameters",
+    "description": "",
+    "type": "object",
+    "properties": {
+        "reads": {
+            "type": "string",
+            "default": "None",
+            "description": "path to reads directory"
+        },
+        "trunclen": {
+            "type": "integer",
+            "default": 250,
+            "description": "int value of trunc length"
+        },
+        "minreads": {
+            "type": "integer",
+            "default": 100
+        },
+        "refseqs": {
+            "type": "string",
+            "default": "None",
+            "description": "path to refseqs"
+        },
+        "reftax": {
+            "type": "string",
+            "default": "None",
+            "description": "path to reftax"
+        },
+        "maxaccepts": {
+            "type": "string",
+            "default": "None",
+            "description": "number of blast results"
+        },
+        "artifacts": {
+            "type": "string",
+            "default": "None",
+            "description": "artifacts directory"
+        }
+    },
+    "required": [
+        "trunclen",
+        "reads"
+    ]
+}
