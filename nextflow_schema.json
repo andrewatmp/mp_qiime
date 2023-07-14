@@ -22,7 +22,7 @@
                     "type": "integer",
                     "description": "Integer value of truncation length",
                     "help_text": "Enter value to truncate to",
-                    "fa_icon": "fas fa-scissors"
+                    "fa_icon": "fa-solid fa-scissors"
                 },
                 "Min Reads": {
                     "type": "integer",
