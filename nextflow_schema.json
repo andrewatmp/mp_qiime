@@ -29,6 +29,21 @@
                     "description": "Minimum number of reads to pass filter",
                     "fa_icon": "fas fa-hashtag"
                 },
+                "RefSeqs": {
+                    "type": "string",
+                    "description": "Qiime artifact for reference dna sequences",
+                    "fa_icon": "fas fa-folder-open"
+                },
+                "RefTax": {
+                    "type": "string",
+                    "description": "Qiime artifact for reference taxonomy",
+                    "fa_icon": "fas fa-folder-open"
+                },
+                "Max Accepts": {
+                    "type": "integer",
+                    "description": "Number of blast results to return",
+                    "fa_icon": "fas fa-hashtag"
+                },
                 "outdir": {
                     "type": "string",
                     "format": "directory-path",
