@@ -27,7 +27,7 @@
                 "Min Reads": {
                     "type": "integer",
                     "description": "Minimum number of reads to pass filter",
-                    "fa_icon": "fas fa-hastag"
+                    "fa_icon": "fas fa-hashtag"
                 },
                 "outdir": {
                     "type": "string",
