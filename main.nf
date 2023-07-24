@@ -1,6 +1,6 @@
 params.reads = "$projectDir/seqs2"
 params.trunclen = 415
-params.minreads = 100
+params.minreads = 20
 params.refseqs = "$projectDir/ncbi-refseqs.qza"
 params.reftax =  "$projectDir/ncbi-refseqs-taxonomy.qza"
 params.maxaccepts = 1
