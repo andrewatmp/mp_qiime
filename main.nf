@@ -1,12 +1,10 @@
-params.reads = "$projectDir/seqs"
-params.fastq = "$projectDir/seqs/*.fastq.gz"
+params.reads = "$projectDir/seqs2"
 params.trunclen = 415
-params.minreads = 100
+params.minreads = 20
 params.refseqs = "$projectDir/ncbi-refseqs.qza"
 params.reftax =  "$projectDir/ncbi-refseqs-taxonomy.qza"
 params.maxaccepts = 1
 params.artifacts = "$projectDir/artifacts"
-params.outputdir = "$projectDir/multiqc"
 
 log.info """\
     MP - Q I I M E   P I P E L I N E
@@ -19,27 +17,9 @@ log.info """\
 
 println "reads: $params.reads"
 
-process FASTQC {
-
-    tag "FastQC"
-    container "andrewatmp/testf"
-
-    input:
-    path(reads)
-
-    output:
-    path "*_fastqc.{zip,html}", emit: fastqc_results
-
-    script:
-    """
-    fastqc $reads
-    """
-}
-
 process IMPORT {
     tag "Importing sequences"
-    // publishDir "${params.artifacts}", mode: 'copy'
-    container "andrewatmp/testf"
+    publishDir "${params.artifacts}", mode: 'copy'
 
     input:
     path(reads)
@@ -66,8 +46,6 @@ process IMPORT {
 process DEMUXVIS {
 
     tag "Quality Visualization"
-    container "andrewatmp/testf"
-
 
     input:
     path(demux)
@@ -87,8 +65,6 @@ process DEMUXVIS {
 process DADA {
 
     tag "Dada2 Error Correction"
-    container "andrewatmp/testf"
-
 
     input:
     path(qza)
@@ -118,8 +94,6 @@ process DADA {
 process MINREADS {
 
     tag "Filtering for min reads"
-    container "andrewatmp/testf"
-
 
     input:
     path(table)
@@ -140,8 +114,6 @@ process MINREADS {
 process DADARESULTS {
 
     tag "Generate dada visualizations"
-    container "andrewatmp/testf"
-
 
     input:
     path(repseqs)
@@ -180,8 +152,6 @@ process DADARESULTS {
 process CLASSIFY {
 
     tag "Classify using BLAST"
-    container "andrewatmp/testf"
-
 
     input:
     path(refseqs)
@@ -209,9 +179,6 @@ process CLASSIFY {
 process TABULATE {
 
     tag "Tabulate Classify Results"
-    container "andrewatmp/testf"
-
-
     input:
     path(classification)
     path(blastresults)
@@ -235,7 +202,6 @@ process TABULATE {
 process BARPLOT {
 
     tag "Generate barplot"
-    container "andrewatmp/qiime_unzip"
 
     input:
     path(filtered)
@@ -243,66 +209,20 @@ process BARPLOT {
 
     output:
     path("taxa-bar-plots.qzv"), emit: barplot
-    path("data/*"), emit: data
 
     script:
+
 
     """
     qiime taxa barplot \
     --i-table $filtered \
     --i-taxonomy $classification \
     --o-visualization "taxa-bar-plots.qzv"
-
-    mkdir extracted
-    mkdir data
-    unzip taxa-bar-plots.qzv '*/data/*' -d extracted
-    mv extracted/*/data/* data
-    mv data/index.html data/Taxonomy_mqc.html
-    rm -rf extracted
-    """
-
-}
-
-process MULTIQC {
-
-    tag "MultiQC"
-    container "andrewatmp/multiqc"
-    stageInMode 'copy'
-
-
-    input:
-    path(fastqc)
-
-    output:
-    path "multiqc_report.html"
-
-    script:
-    """
-    multiqc .
     """
 }
-
-process MULTIQC2 {
-
-    tag "MultiQC2"
-    container "andrewatmp/multiqc"
-
-    input:
-    path(data)
-
-    script:
-    """
-    multiqc .
-    """
-}
-
-
-
 
 workflow {
 
-    fastqc_ch=Channel.fromPath(params.fastq)
-    FASTQC(fastqc_ch)
     IMPORT(params.reads)
 
     dada_ch = DADA(IMPORT.out.demux)
@@ -313,12 +233,4 @@ workflow {
     TABULATE(classification_ch)
 
     BARPLOT(filtered_ch, CLASSIFY.out.classification)
-
-    multiqc_files = Channel.empty()
-    multiqc_files = multiqc_files.mix(FASTQC.out.fastqc_results)
-    multiqc_files = multiqc_files.mix(BARPLOT.out.data)
-    MULTIQC(multiqc_files.collect())
-
-
-    // MULTIQC2(BARPLOT.out.data)
 }
