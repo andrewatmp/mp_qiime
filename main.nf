@@ -1,4 +1,4 @@
-params.reads = "$projectDir/seqs"
+params.reads = "$projectDir/seqs2"
 params.fastq = "$projectDir/seqs/*.fastq.gz"
 params.trunclen = 415
 params.minreads = 100
