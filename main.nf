@@ -22,7 +22,7 @@ println "reads: $params.reads"
 process FASTQC {
 
     tag "FastQC"
-    container "testf"
+    container "andrewatmp/testf"
     label "big_memory"
 
     input:
@@ -40,7 +40,7 @@ process FASTQC {
 process IMPORT {
     tag "Importing sequences"
     // publishDir "${params.artifacts}", mode: 'copy'
-    container "testf"
+    container "andrewatmp/testf"
 
     input:
     path(reads)
@@ -67,7 +67,7 @@ process IMPORT {
 process DEMUXVIS {
 
     tag "Quality Visualization"
-    container "testf"
+    container "andrewatmp/testf"
 
 
     input:
@@ -88,7 +88,7 @@ process DEMUXVIS {
 process DADA {
 
     tag "Dada2 Error Correction"
-    container "testf"
+    container "andrewatmp/testf"
 
 
     input:
@@ -119,7 +119,7 @@ process DADA {
 process MINREADS {
 
     tag "Filtering for min reads"
-    container "testf"
+    container "andrewatmp/testf"
 
 
     input:
@@ -141,7 +141,7 @@ process MINREADS {
 process DADARESULTS {
 
     tag "Generate dada visualizations"
-    container "testf"
+    container "andrewatmp/testf"
 
 
     input:
@@ -181,7 +181,7 @@ process DADARESULTS {
 process CLASSIFY {
 
     tag "Classify using BLAST"
-    container "testf"
+    container "andrewatmp/testf"
 
 
     input:
@@ -210,6 +210,9 @@ process CLASSIFY {
 process TABULATE {
 
     tag "Tabulate Classify Results"
+    container "andrewatmp/testf"
+
+
     input:
     path(classification)
     path(blastresults)
@@ -233,7 +236,7 @@ process TABULATE {
 process BARPLOT {
 
     tag "Generate barplot"
-    container "qiime_unzip"
+    container "andrewatmp/qiime_unzip"
 
     input:
     path(filtered)
