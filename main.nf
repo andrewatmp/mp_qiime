@@ -89,6 +89,7 @@ process DADA {
 
     tag "Dada2 Error Correction"
     container "andrewatmp/testf"
+    label "big_memory"
 
 
     input:
