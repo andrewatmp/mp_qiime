@@ -270,14 +270,13 @@ process MULTIQC {
     tag "MultiQC"
     container "andrewatmp/multiqc"
     stageInMode 'copy'
-    stageOutMode 'copy'
 
 
     input:
     path(fastqc)
 
     output:
-    path "multiqc_report.html"
+    path "."
 
     script:
     """
