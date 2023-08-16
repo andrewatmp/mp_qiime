@@ -275,7 +275,7 @@ process MULTIQC {
 
 
     input:
-    path(fastqc). stageAs "*"
+    path(fastqc), stageAs "*"
 
     output:
     path "."
