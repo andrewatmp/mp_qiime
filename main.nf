@@ -1,5 +1,5 @@
-params.reads = "$projectDir/seqs2"
-params.fastq = "$projectDir/seqs2/*.fastq.gz"
+params.reads = "$projectDir/seqs"
+params.fastq = "$projectDir/seqs/*.fastq.gz"
 params.trunclen = 415
 params.minreads = 100
 params.refseqs = "$projectDir/ncbi-refseqs.qza"
@@ -270,6 +270,7 @@ process MULTIQC {
     tag "MultiQC"
     container "andrewatmp/multiqc"
     stageInMode 'copy'
+    stageOutMode 'copy'
 
 
     input:
