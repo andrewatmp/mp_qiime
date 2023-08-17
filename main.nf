@@ -238,6 +238,7 @@ process BARPLOT {
 
     tag "Generate barplot"
     container "andrewatmp/qiime_unzip"
+    publishDir params.outdir, mode: 'copy'
 
     input:
     path(filtered)
@@ -277,7 +278,7 @@ process MULTIQC {
     path(fastqc)
 
     output:
-    path "."
+    path "multiqc_report.html"
 
     script:
     """
