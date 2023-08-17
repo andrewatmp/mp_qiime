@@ -23,7 +23,6 @@ process FASTQC {
 
     tag "FastQC"
     container "andrewatmp/testf"
-    label "big_memory"
 
     input:
     path(reads)
