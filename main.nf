@@ -277,7 +277,7 @@ process MULTIQC {
     path(fastqc)
 
     output:
-    path "multiqc_report.html"
+    path .
 
     script:
     """
