@@ -88,8 +88,6 @@ process DADA {
 
     tag "Dada2 Error Correction"
     container "andrewatmp/testf"
-    label "big_memory"
-
 
     input:
     path(qza)
@@ -277,7 +275,7 @@ process MULTIQC {
     path(fastqc)
 
     output:
-    path ".", emit: multiqc
+    path "multiqc_report.html"
 
     script:
     """
