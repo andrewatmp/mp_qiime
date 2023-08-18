@@ -254,10 +254,9 @@ process BARPLOT {
     --o-visualization "taxa-bar-plots.qzv"
 
     mkdir extracted
-    mkdir data
     unzip taxa-bar-plots.qzv '*/data/*' -d extracted
-    mv extracted/*/data/* data
-    mv data/index.html data/Taxonomy_mqc.html
+    mv extracted/*/data/* .
+    mv index.html Taxonomy_mqc.html
     rm -rf extracted
     """
 
