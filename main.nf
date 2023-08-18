@@ -243,7 +243,7 @@ process BARPLOT {
 
     output:
     path("taxa-bar-plots.qzv"), emit: barplot
-    path("data/*"), emit: data
+    path("*"), emit: data
 
     script:
 
