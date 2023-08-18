@@ -282,20 +282,6 @@ process MULTIQC {
     """
 }
 
-process MULTIQC2 {
-
-    tag "MultiQC2"
-    container "andrewatmp/multiqc"
-
-    input:
-    path(data)
-
-    script:
-    """
-    multiqc .
-    """
-}
-
 
 
 
@@ -320,5 +306,4 @@ workflow {
     MULTIQC(multiqc_files.collect())
 
 
-    // MULTIQC2(BARPLOT.out.data)
 }
