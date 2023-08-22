@@ -11,7 +11,7 @@
             "description": "",
             "default": "",
             "properties": {
-                "Sequence input": {
+                "reads": {
                     "type": "string",
                     "mimetype": "text/tsv",
                     "fa_icon": "fas fa-dna",
