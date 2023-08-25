@@ -268,7 +268,7 @@ process MULTIQC {
     container "andrewatmp/multiqc"
     containerOptions = "--user root"
     stageInMode 'copy'
-    // publishDir params.outdir, mode: 'copy'
+    publishDir params.outdir, mode: 'copy'
 
 
     input:
