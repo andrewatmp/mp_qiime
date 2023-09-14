@@ -6,7 +6,7 @@ params.refseqs = "$projectDir/ncbi-refseqs.qza"
 params.reftax =  "$projectDir/ncbi-refseqs-taxonomy.qza"
 params.maxaccepts = 1
 params.artifacts = "$projectDir/artifacts"
-params.outdir = "https://mp-bioinfo.s3.us-west-1.amazonaws.com/test/"
+params.outdir = "s3://mp-bioinfo/test/"
 
 log.info """\
     MP - Q I I M E   P I P E L I N E
